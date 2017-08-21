@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xpjun.library.BlurPolice;
 import com.xpjun.library.EasyBlur;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.text);
         img = (ImageView) findViewById(R.id.img);
 
+
+
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyBlur.getInstance().blur(R.drawable.head2).useRs(true).into(img);
+                EasyBlur.getInstance().blur(R.drawable.head2).into(img);
             }
         });
     }

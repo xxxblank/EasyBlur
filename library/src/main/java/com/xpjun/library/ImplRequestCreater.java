@@ -11,7 +11,8 @@ import android.widget.ImageView;
 
 public class ImplRequestCreater implements RequestCreator {
 
-    private boolean useRenderScript;
+    @BlurPolice
+    private int police = BlurPolice.javaBlur;
     private int radius = 8;
     private int multiReduce = 8;
 
@@ -29,11 +30,8 @@ public class ImplRequestCreater implements RequestCreator {
 
     @Override
     public void into(ImageView imageView) {
-        if (useRenderScript){
-            blurHelper = new RenderScriptBlurHelper(imageView.getContext());
-        }else {
-            blurHelper = new FastBlurHelper();
-        }
+
+        blurHelper = BlurHelperFactory.getBlurHelper(imageView.getContext(),police);
 
         Bitmap scaleBitmap,temp = null;
 
@@ -68,8 +66,8 @@ public class ImplRequestCreater implements RequestCreator {
     }
 
     @Override
-    public RequestCreator useRs(boolean use) {
-        useRenderScript = use;
+    public RequestCreator police(@BlurPolice int police) {
+        this.police = police;
         return this;
     }
 

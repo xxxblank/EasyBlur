@@ -12,7 +12,7 @@ public interface RequestCreator {
 
     RequestCreator radius(int radius);
 
-    RequestCreator useRs(boolean use);
+    RequestCreator police(@BlurPolice int BlurPolice);
 
     RequestCreator reduce(int multi);
 }
