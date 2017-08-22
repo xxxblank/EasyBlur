@@ -3,6 +3,7 @@ package com.xpjun.library;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.IntRange;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -37,6 +38,22 @@ public class BlurDialogBuilder implements Serializable{
     protected int mCheckedItem;
     protected boolean isSingleChoice;
     protected AdapterView.OnItemClickListener mItemClickListener;
+    @BlurPolice
+    protected int police = BlurPolice.rsBlur;
+    protected int radius = 8;
+    protected int multiReduce = 8;
+
+    public void setPolice(@BlurPolice int police) {
+        this.police = police;
+    }
+
+    public void setRadius(@IntRange(from = 1,to = 25) int radius) {
+        this.radius = radius;
+    }
+
+    public void setMultiReduce(@IntRange(from = 1,to = 25) int multiReduce) {
+        this.multiReduce = multiReduce;
+    }
 
     public BlurDialogBuilder setTitle(CharSequence title){
         this.title = title;

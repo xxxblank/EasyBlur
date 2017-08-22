@@ -1,11 +1,13 @@
 package com.xpjun.library;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
+
+import com.xpjun.library.requestcreater.ImplRequestCreater;
+import com.xpjun.library.requestcreater.RequestCreator;
 
 import java.io.File;
 import java.lang.ref.WeakReference;

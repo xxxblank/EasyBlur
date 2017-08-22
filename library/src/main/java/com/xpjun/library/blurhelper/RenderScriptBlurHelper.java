@@ -1,4 +1,4 @@
-package com.xpjun.library;
+package com.xpjun.library.blurhelper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.renderscript.Type;
 import android.support.annotation.IntRange;
+
+import com.xpjun.library.blurhelper.BlurHelper;
 
 /**
  * Created by U-nookia on 2017/8/21.

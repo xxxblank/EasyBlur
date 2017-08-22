@@ -1,6 +1,8 @@
-package com.xpjun.library;
+package com.xpjun.library.blurhelper;
 
 import android.graphics.Bitmap;
+
+import com.xpjun.library.blurhelper.BlurHelper;
 
 /**
  * Created by U-nookia on 2017/8/21.

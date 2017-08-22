@@ -1,9 +1,14 @@
-package com.xpjun.library;
+package com.xpjun.library.requestcreater;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.IntRange;
 import android.widget.ImageView;
+
+import com.xpjun.library.BlurPolice;
+import com.xpjun.library.blurhelper.BlurHelper;
+import com.xpjun.library.blurhelper.BlurHelperFactory;
 
 /**
  * Created by U-nookia on 2017/8/21.
@@ -60,7 +65,7 @@ public class ImplRequestCreater implements RequestCreator {
     }
 
     @Override
-    public RequestCreator radius(int radius) {
+    public RequestCreator radius(@IntRange(from = 1,to = 25)int radius) {
         this.radius = radius;
         return this;
     }
@@ -72,7 +77,7 @@ public class ImplRequestCreater implements RequestCreator {
     }
 
     @Override
-    public RequestCreator reduce(int multi){
+    public RequestCreator reduce(@IntRange(from = 1,to = 25)int multi){
         multiReduce = multi;
         return this;
     }

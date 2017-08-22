@@ -1,4 +1,4 @@
-package com.xpjun.library;
+package com.xpjun.library.blurhelper;
 
 import android.graphics.Bitmap;
 

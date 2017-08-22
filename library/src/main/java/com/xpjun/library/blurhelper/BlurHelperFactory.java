@@ -1,13 +1,15 @@
-package com.xpjun.library;
+package com.xpjun.library.blurhelper;
 
 import android.content.Context;
+
+import com.xpjun.library.BlurPolice;
 
 /**
  * Created by U-nookia on 2017/8/21.
  */
 
 public class BlurHelperFactory {
-    public static BlurHelper getBlurHelper(Context context,@BlurPolice int police){
+    public static BlurHelper getBlurHelper(Context context, @BlurPolice int police){
         switch (police){
             case BlurPolice.javaBlur:
                 return new FastBlurHelper();

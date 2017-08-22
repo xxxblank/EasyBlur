@@ -1,6 +1,8 @@
-package com.xpjun.library;
+package com.xpjun.library.requestcreater;
 
 import android.widget.ImageView;
+
+import com.xpjun.library.BlurPolice;
 
 /**
  * Created by U-nookia on 2017/8/20.

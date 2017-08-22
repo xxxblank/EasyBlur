@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
-import android.widget.Toast;
 
 /**
  * Created by U-nookia on 2017/8/22.
@@ -33,6 +32,21 @@ public class SupportDialogFragment extends DialogFragment {
         builder = (BlurDialogBuilder) getArguments().get("builder");
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -55,5 +69,20 @@ public class SupportDialogFragment extends DialogFragment {
                         .setSingleChoiceItems(builder.items,builder.mCheckedItem,builder.mOnClickListener);
 
         return dialogBuilder.create();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }
