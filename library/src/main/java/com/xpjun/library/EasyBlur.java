@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.xpjun.library.requestcreater.ImplRequestCreater;
 import com.xpjun.library.requestcreater.RequestCreator;
@@ -57,12 +58,21 @@ public class EasyBlur {
         private WeakReference<Activity> activityRe;
         private BlurDialogBuilder builder;
 
-        protected BlurDialog(Activity activity,BlurDialogBuilder builder) {
-            activityRe = new WeakReference<Activity>(activity);
+        protected BlurDialog(BlurDialogBuilder builder) {
             this.builder = builder;
         }
 
+        public BlurDialog bind(Activity activity){
+            activityRe = new WeakReference<Activity>(activity);
+            return this;
+        }
+
         public void show(){
+            if (activityRe==null||activityRe.get()==null){
+                Log.e("EasyBlurError","you must call bind() method before show()");
+                //TODO:异常处理
+                return;
+            }
             Activity activityBind = activityRe.get();
             if (activityBind instanceof FragmentActivity){
                 SupportDialogFragment dialogFragment = SupportDialogFragment.getInstance(builder);

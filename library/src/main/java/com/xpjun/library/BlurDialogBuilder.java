@@ -1,6 +1,5 @@
 package com.xpjun.library;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
@@ -16,7 +15,6 @@ import java.io.Serializable;
 
 public class BlurDialogBuilder implements Serializable{
 
-    private Activity activity;
     protected CharSequence title;
     protected CharSequence message;
     protected Drawable mIcon;
@@ -170,16 +168,7 @@ public class BlurDialogBuilder implements Serializable{
         return this;
     }
 
-    public BlurDialogBuilder bindActivity(Activity activity){
-        this.activity = activity;
-        return this;
-    }
-
     public EasyBlur.BlurDialog build(){
-        if (activity==null){
-            //TODO:抛出异常
-            Log.e("BlurDialogBuilder","must bind activity before build");
-        }
-        return new EasyBlur.BlurDialog(activity,this);
+        return new EasyBlur.BlurDialog(this);
     }
 }

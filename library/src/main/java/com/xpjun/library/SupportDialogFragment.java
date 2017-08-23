@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 /**
  * Created by U-nookia on 2017/8/22.
@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 public class SupportDialogFragment extends DialogFragment {
 
     private BlurDialogBuilder builder;
+    private BgBlurEngine engine;
 
     public static SupportDialogFragment getInstance(BlurDialogBuilder builder){
         SupportDialogFragment fragment = new SupportDialogFragment();
@@ -28,28 +29,28 @@ public class SupportDialogFragment extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        Log.e("dialog","attach");
+        engine = new BgBlurEngine(getActivity());
         builder = (BlurDialogBuilder) getArguments().get("builder");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        Log.e("dialog","start");
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        engine.onResume();
+        Log.e("dialog","resume");
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Log.e("dialog","create dialog");
         AlertDialog.Builder dialogBuilder =
                 new AlertDialog
                         .Builder(getActivity())
@@ -74,15 +75,14 @@ public class SupportDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+        engine.onDismiss();
+        Log.e("dialog","dismiss");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+        engine.onDetach();
+        Log.e("dialog","detach");
     }
 }
