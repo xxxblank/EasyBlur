@@ -4,7 +4,11 @@
 > - 对任意图片进行可设置强度的高斯模糊处理，并显示到需要的控件上；
 > - 弹出以当前画面的高斯模糊为背景的对话框
 
-## 目前已实现
+## DONE
+2017-8-23 18:40
+- 构建与dialogfragment生命周期绑定的engine类
+- 将绑定activity的方法从builder类移动到唯一使用那个activity引用的BlurDialog类中，避免了将activity对象序列化放到bundle中来回传的情况
+
 2017-8-22 17：50
 - 初步完成由dialogfragment实现的对话框
 - 对app包和v4包的dialogfragment进行了封装，通过builder获取初始化对话框需要的数据（后面加上对话框背景高斯模糊也要通过builder来获取数据）
