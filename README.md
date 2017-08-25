@@ -5,6 +5,11 @@
 > - 弹出以当前画面的高斯模糊为背景的对话框
 
 ## DONE
+2017-8-25 18:40
+- 将单一Engine类换为接口和实现类，方便以后扩展
+- 添加了本地图片压缩，修复了本地图片占内存太大高斯模糊时会oom的bug
+- dialog的动画
+
 2017-8-23 18:40
 - 构建与dialogfragment生命周期绑定的engine类
 - 将绑定activity的方法从builder类移动到唯一使用那个activity引用的BlurDialog类中，避免了将activity对象序列化放到bundle中来回传的情况
@@ -21,16 +26,21 @@
 - 可进行Java高斯模糊和renderScript高斯模糊的选择、以及模糊半径和图像缩放大小的配置
 
 ## TODO
+2017-8-25 18:40
+- engine与dialogfragment生命周期绑定后的操作
+- 开新线程进行压缩和高斯模糊的操作，避免主线程阻塞
 
 2017-8-22 18:00
 - 将对话框的背景高斯模糊
 - 封装的对话框builder还没有将全部的alertdialog功能放进去
 
 2017-8-21 15：00
-- 网络图片的处理
+- ~~网络图片的处理~~
 - ~~当前界面的高斯模糊以及对话框功能的实现~~
 
 ## THINKING
+2017-8-25
+- 是否需要使用线程池管理压缩图片的线程，使用cache还是哪种线程池
 
 2017-8-22
 - BlurDialog的show方法根据传入activity的instanceof进行了if-else判断，来选择使用app的dialogfragment还是v4包的dialogfragment，这种扩展性不高的方案在目前只有这两种dialogfragment的前提下是否可行
