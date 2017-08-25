@@ -1,6 +1,9 @@
 package com.xpjun.easyblurtest;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,13 +29,15 @@ public class MainActivity extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyBlur.BlurDialog dialog =
+                /*EasyBlur.BlurDialog dialog =
                         new BlurDialogBuilder()
                                 .setTitle("test")
                                 .setMessage("hhhahdafs")
                                 .build()
                                 .bind(MainActivity.this);
-                dialog.show();
+                dialog.show();*/
+                //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.big2);
+                EasyBlur.getInstance().blur(R.drawable.big2).into(img);
             }
         });
     }

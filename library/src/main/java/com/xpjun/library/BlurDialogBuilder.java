@@ -40,6 +40,11 @@ public class BlurDialogBuilder implements Serializable{
     protected int police = BlurPolice.rsBlur;
     protected int radius = 8;
     protected int multiReduce = 8;
+    protected boolean dimming = false;   //background become black or no change
+
+    public void setDimming(boolean dimming) {
+        this.dimming = dimming;
+    }
 
     public void setPolice(@BlurPolice int police) {
         this.police = police;

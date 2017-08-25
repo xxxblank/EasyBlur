@@ -7,6 +7,7 @@ import android.support.annotation.IntRange;
 import android.widget.ImageView;
 
 import com.xpjun.library.BlurPolice;
+import com.xpjun.library.CompressUtil;
 import com.xpjun.library.blurhelper.BlurHelper;
 import com.xpjun.library.blurhelper.BlurHelperFactory;
 
@@ -42,12 +43,11 @@ public class ImplRequestCreater implements RequestCreator {
 
         if (original!=null){
             temp = original;
-            return;
         }
 
         if (resourseId!=0){
-            temp = BitmapFactory
-                    .decodeResource(imageView.getContext().getResources(),resourseId);
+            temp = CompressUtil.getCompressBitmap(imageView.getContext().getResources(),
+                    resourseId,imageView.getWidth(),imageView.getHeight());
         }
 
         if (uri!=null){
@@ -61,6 +61,7 @@ public class ImplRequestCreater implements RequestCreator {
         scaleBitmap = Bitmap.createScaledBitmap(temp,temp.getWidth()/multiReduce
                 ,temp.getHeight()/multiReduce,false);
         Bitmap result = blurHelper.doBlur(scaleBitmap,radius,true);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageBitmap(result);
     }
 
