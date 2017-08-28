@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.WindowManager;
@@ -31,16 +32,16 @@ public class SupportDialogFragment extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.e("dialog","attach");
+        builder = (BlurDialogBuilder) getArguments().get("builder");
         engine = new BgBlurEngine(getActivity());
         engine.setRadius(builder.radius);
         engine.setBlurPolice(builder.police);
-        engine.setDimming(builder.dimming);
         engine.setMultiReduce(builder.multiReduce);
-        builder = (BlurDialogBuilder) getArguments().get("builder");
     }
 
     @Override
     public void onStart() {
+        Log.e("dialog","start");
         Dialog dialog = getDialog();
         if (dialog!=null){
             if (!builder.dimming){
@@ -59,6 +60,7 @@ public class SupportDialogFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("dialog","resume");
         engine.onResume(getRetainInstance());
     }
 

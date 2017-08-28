@@ -13,5 +13,4 @@ public interface BlurEngine {
     void setRadius(@IntRange(from = 1,to = 25) int radius);
     void setBlurPolice(@BlurPolice int police);
     void setMultiReduce(@IntRange(from = 1,to = 25)int multi);
-    void setDimming(boolean dimming);
 }

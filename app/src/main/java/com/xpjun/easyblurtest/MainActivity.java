@@ -29,15 +29,19 @@ public class MainActivity extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*EasyBlur.BlurDialog dialog =
+
+                EasyBlur.BlurDialog dialog =
                         new BlurDialogBuilder()
                                 .setTitle("test")
                                 .setMessage("hhhahdafs")
+                                .setRadius(3)
+                                .setMultiReduce(4)
+                                .setDimming(true)
                                 .build()
                                 .bind(MainActivity.this);
-                dialog.show();*/
+                dialog.show();
                 //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.big2);
-                EasyBlur.getInstance().blur(R.drawable.big2).into(img);
+                //EasyBlur.getInstance().blur(R.drawable.big2).into(img);
             }
         });
     }

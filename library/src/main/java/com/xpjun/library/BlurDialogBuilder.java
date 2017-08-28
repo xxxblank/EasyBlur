@@ -38,24 +38,28 @@ public class BlurDialogBuilder implements Serializable{
     protected AdapterView.OnItemClickListener mItemClickListener;
     @BlurPolice
     protected int police = BlurPolice.rsBlur;
-    protected int radius = 8;
-    protected int multiReduce = 8;
-    protected boolean dimming = false;   //background become black or no change
+    protected int radius = 4;
+    protected int multiReduce = 4;
+    protected boolean dimming = true;   //background become black or no change
 
-    public void setDimming(boolean dimming) {
+    public BlurDialogBuilder setDimming(boolean dimming) {
         this.dimming = dimming;
+        return this;
     }
 
-    public void setPolice(@BlurPolice int police) {
+    public BlurDialogBuilder setPolice(@BlurPolice int police) {
         this.police = police;
+        return this;
     }
 
-    public void setRadius(@IntRange(from = 1,to = 25) int radius) {
+    public BlurDialogBuilder setRadius(@IntRange(from = 1,to = 25) int radius) {
         this.radius = radius;
+        return this;
     }
 
-    public void setMultiReduce(@IntRange(from = 1,to = 25) int multiReduce) {
+    public BlurDialogBuilder setMultiReduce(@IntRange(from = 1,to = 25) int multiReduce) {
         this.multiReduce = multiReduce;
+        return this;
     }
 
     public BlurDialogBuilder setTitle(CharSequence title){

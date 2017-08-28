@@ -2,6 +2,7 @@ package com.xpjun.library.requestcreater;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.IntRange;
 import android.widget.ImageView;
@@ -19,8 +20,8 @@ public class ImplRequestCreater implements RequestCreator {
 
     @BlurPolice
     private int police = BlurPolice.javaBlur;
-    private int radius = 8;
-    private int multiReduce = 8;
+    private int radius = 4;
+    private int multiReduce = 4;
 
     private Bitmap original;
     private int resourseId;
@@ -62,7 +63,7 @@ public class ImplRequestCreater implements RequestCreator {
                 ,temp.getHeight()/multiReduce,false);
         Bitmap result = blurHelper.doBlur(scaleBitmap,radius,true);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageBitmap(result);
+        imageView.setImageDrawable(new BitmapDrawable(result));
     }
 
     @Override
