@@ -3,6 +3,9 @@ package com.xpjun.library;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import java.io.File;
 
 /**
  * Created by U-nookia on 2017/8/25.
@@ -18,6 +21,15 @@ public class CompressUtil {
         options.inSampleSize = getSampleSize(width,height,options); //图像像素的缩放比例
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(resources,resId,options);
+    }
+
+    public static Bitmap getCompressBitmap(File file,int width,int height){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;//don't get bitmap
+        BitmapFactory.decodeFile(file.getAbsolutePath(),options);
+        options.inSampleSize = getSampleSize(width,height,options); //图像像素的缩放比例
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(file.getAbsolutePath(),options);
     }
 
     private static int getSampleSize(int width, int height

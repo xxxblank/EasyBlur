@@ -80,7 +80,7 @@ public class SupportDialogFragment extends DialogFragment {
                         .setMultiChoiceItems(builder.items,builder.onCheckedItems,builder.mOnCheckboxClickListener)
                         .setNegativeButton(builder.negativeBtText,builder.mOnClickListener)
                         .setPositiveButton(builder.positiveBtText,builder.positiveListener)
-                        .setNeutralButton(builder.negativeBtText,builder.neutralListener)
+                        .setNeutralButton(builder.neutralBtText,builder.neutralListener)
                         .setOnKeyListener(builder.keyListener)
                         .setOnDismissListener(builder.dismissListener)
                         .setSingleChoiceItems(builder.items,builder.mCheckedItem,builder.mOnClickListener);

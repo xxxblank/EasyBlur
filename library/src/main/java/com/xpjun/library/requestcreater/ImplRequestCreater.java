@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.IntRange;
 import android.widget.ImageView;
 
@@ -11,6 +12,9 @@ import com.xpjun.library.BlurPolice;
 import com.xpjun.library.CompressUtil;
 import com.xpjun.library.blurhelper.BlurHelper;
 import com.xpjun.library.blurhelper.BlurHelperFactory;
+
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * Created by U-nookia on 2017/8/21.
@@ -25,14 +29,14 @@ public class ImplRequestCreater implements RequestCreator {
 
     private Bitmap original;
     private int resourseId;
-    private Uri uri;
+    private File file;
 
     private BlurHelper blurHelper;
 
-    public ImplRequestCreater(Bitmap original, int resourseId, Uri uri) {
+    public ImplRequestCreater(Bitmap original, int resourseId, File file) {
         this.original = original;
         this.resourseId = resourseId;
-        this.uri = uri;
+        this.file = file;
     }
 
     @Override
@@ -51,8 +55,8 @@ public class ImplRequestCreater implements RequestCreator {
                     resourseId,imageView.getWidth(),imageView.getHeight());
         }
 
-        if (uri!=null){
-            //TODO:
+        if (file!=null){
+            temp = CompressUtil.getCompressBitmap(file,imageView.getWidth(),imageView.getHeight());
         }
 
         if (temp == null){
