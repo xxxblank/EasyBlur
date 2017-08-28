@@ -51,7 +51,6 @@ public class BgBlurEngine implements BlurEngine{
                 .police(police)
                 .radius(radius)
                 .into(blurBgView);
-        int top = (int) Math.ceil((double) frame.top/3.8);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 frame.width(),frame.height()+frame.top/2);
         params.setMargins(0,0,0,0);
