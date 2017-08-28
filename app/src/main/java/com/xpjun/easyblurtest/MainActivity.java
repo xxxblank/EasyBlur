@@ -1,5 +1,6 @@
 package com.xpjun.easyblurtest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
                         new BlurDialogBuilder()
                                 .setTitle("test")
                                 .setMessage("hhhahdafs")
-                                .setRadius(3)
-                                .setMultiReduce(4)
+                                .setRadius(1)
+                                .setMultiReduce(1)
                                 .setDimming(true)
                                 .build()
                                 .bind(MainActivity.this);

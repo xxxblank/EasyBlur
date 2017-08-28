@@ -17,9 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:id="@+id/img"
+        android:src="@drawable/head2"
         android:layout_below="@+id/text"/>
 
 </RelativeLayout>

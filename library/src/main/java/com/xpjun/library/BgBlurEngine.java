@@ -51,10 +51,10 @@ public class BgBlurEngine implements BlurEngine{
                 .police(police)
                 .radius(radius)
                 .into(blurBgView);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                frame.width(),frame.height());
         int top = (int) Math.ceil((double) frame.top/3.8);
-        params.setMargins(0,top,0,0);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                frame.width(),frame.height()+frame.top/2);
+        params.setMargins(0,0,0,0);
         holdActivity.getWindow().addContentView(blurBgView,params);
         bgBitmap.recycle();
         backgroundView.setDrawingCacheEnabled(false);
