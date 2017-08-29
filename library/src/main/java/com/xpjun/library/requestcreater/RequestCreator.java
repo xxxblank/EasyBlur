@@ -1,5 +1,6 @@
 package com.xpjun.library.requestcreater;
 
+import android.support.annotation.IntRange;
 import android.widget.ImageView;
 
 import com.xpjun.library.BlurPolice;
@@ -12,9 +13,9 @@ public interface RequestCreator {
 
     void into(ImageView imageView);
 
-    RequestCreator radius(int radius);
+    RequestCreator radius(@IntRange(from = 1,to = 25) int radius);
 
     RequestCreator police(@BlurPolice int BlurPolice);
 
-    RequestCreator reduce(int multi);
+    RequestCreator reduce(@IntRange(from = 1,to = 25) int multi);
 }

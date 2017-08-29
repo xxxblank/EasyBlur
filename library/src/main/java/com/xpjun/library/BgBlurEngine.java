@@ -63,8 +63,7 @@ public class BgBlurEngine implements BlurEngine{
     public void onDismiss() {
         Log.e("BgBlurEngine","engine dismiss");
         if (blurBgView==null){
-            Log.e("BgBlurEngine","background blur view has not be shown");
-            return;
+            throw new RuntimeException("background blur view has not be shown");
         }
         blurBgView.animate()
                 .alpha(0)

@@ -1,5 +1,6 @@
 package com.xpjun.library;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
@@ -36,6 +37,7 @@ public class BlurDialogBuilder implements Serializable{
     protected int mCheckedItem;
     protected boolean isSingleChoice;
     protected AdapterView.OnItemClickListener mItemClickListener;
+    protected Activity activity;
     @BlurPolice
     protected int police = BlurPolice.rsBlur;
     protected int radius = 4;
@@ -59,6 +61,11 @@ public class BlurDialogBuilder implements Serializable{
 
     public BlurDialogBuilder setMultiReduce(@IntRange(from = 1,to = 25) int multiReduce) {
         this.multiReduce = multiReduce;
+        return this;
+    }
+
+    public BlurDialogBuilder bind(Activity activity){
+        this.activity = activity;
         return this;
     }
 
@@ -178,6 +185,28 @@ public class BlurDialogBuilder implements Serializable{
     }
 
     public EasyBlur.BlurDialog build(){
-        return new EasyBlur.BlurDialog(this);
+        return new EasyBlur.BlurDialog(this,activity);
+    }
+
+    public void recycle() {
+        title = null;
+        message = null;
+        mIcon = null;
+        positiveBtText = null;
+        negativeBtText = null;
+        neutralBtText = null;
+        positiveListener = null;
+        negativeListener = null;
+        neutralListener = null;
+        mOnClickListener = null;
+        cancelListener = null;
+        dismissListener = null;
+        keyListener = null;
+        items = null;
+        adapter = null;
+        onCheckedItems = null;
+        mOnCheckboxClickListener = null;
+        mItemClickListener = null;
+        activity = null;
     }
 }

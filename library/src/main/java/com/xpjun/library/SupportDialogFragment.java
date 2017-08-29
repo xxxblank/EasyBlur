@@ -92,6 +92,7 @@ public class SupportDialogFragment extends DialogFragment {
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         engine.onDismiss();
+        builder.recycle();
         Log.e("dialog","dismiss");
     }
 

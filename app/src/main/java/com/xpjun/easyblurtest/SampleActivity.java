@@ -25,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class SampleActivity extends AppCompatActivity {
+public class SampleActivity extends Activity {
 
     private Button dialog;
     private ImageView img;
@@ -66,8 +66,8 @@ public class SampleActivity extends AppCompatActivity {
 
         verifyStoragePermissions(this);
 
-        dialog = (Button) findViewById(R.id.dialog);
-        img = (ImageView) findViewById(R.id.img);
+        dialog =  findViewById(R.id.dialog);
+        img =  findViewById(R.id.img);
 
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +75,7 @@ public class SampleActivity extends AppCompatActivity {
 
                 EasyBlur.BlurDialog dialog =
                         new BlurDialogBuilder()
+                                .bind(SampleActivity.this)
                                 .setPolice(BlurPolice.rsBlur)
                                 .setTitle("test")
                                 .setMessage("this is a dialog with blur background")
@@ -83,8 +84,7 @@ public class SampleActivity extends AppCompatActivity {
                                 .setRadius(3)
                                 .setMultiReduce(3)
                                 .setDimming(true)
-                                .build()
-                                .bind(SampleActivity.this);
+                                .build();
                 dialog.show();
             }
         });
@@ -114,12 +114,8 @@ public class SampleActivity extends AppCompatActivity {
         findViewById(R.id.path).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    EasyBlur.getInstance().blur(getExternalFilesDir(null)+"/testImg/"+"test2.jpg")
-                            .police(BlurPolice.rsBlur).into(img);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                EasyBlur.getInstance().blur(getExternalFilesDir(null)+"/testImg/"+"test2.jpg")
+                        .police(BlurPolice.rsBlur).into(img);
             }
         });
 

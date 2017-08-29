@@ -15,6 +15,8 @@ import com.xpjun.library.blurhelper.BlurHelperFactory;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by U-nookia on 2017/8/21.
@@ -23,7 +25,7 @@ import java.io.InputStream;
 public class ImplRequestCreater implements RequestCreator {
 
     @BlurPolice
-    private int police = BlurPolice.javaBlur;
+    private int police = BlurPolice.rsBlur;
     private int radius = 4;
     private int multiReduce = 4;
 
@@ -41,6 +43,10 @@ public class ImplRequestCreater implements RequestCreator {
 
     @Override
     public void into(ImageView imageView) {
+
+        if (imageView==null){
+            throw new RuntimeException("the target imageView must not be null");
+        }
 
         blurHelper = BlurHelperFactory.getBlurHelper(imageView.getContext(),police);
 
@@ -60,14 +66,18 @@ public class ImplRequestCreater implements RequestCreator {
         }
 
         if (temp == null){
-            //TODO:抛出异常
-            return;
+            throw new RuntimeException("have no bitmap to show");
         }
-        scaleBitmap = Bitmap.createScaledBitmap(temp,temp.getWidth()/multiReduce
-                ,temp.getHeight()/multiReduce,false);
-        Bitmap result = blurHelper.doBlur(scaleBitmap,radius,true);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageDrawable(new BitmapDrawable(result));
+        try {
+            scaleBitmap = Bitmap.createScaledBitmap(temp,temp.getWidth()/multiReduce
+                    ,temp.getHeight()/multiReduce,false);
+            Bitmap result = blurHelper.doBlur(scaleBitmap,radius,true);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageDrawable(new BitmapDrawable(result));
+        }finally {
+            if (original!=null) original.recycle();
+            temp.recycle();
+        }
     }
 
     @Override
