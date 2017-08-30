@@ -5,8 +5,13 @@
 > - ~~弹出以当前画面的高斯模糊为背景的对话框~~
 
 ## DONE
+2017-8-30 17:00
+- 增加了blurdialog对自定义view添加支持
+- 增加了底部dialog，适配v4和app包
+- 将两个dialogfragment中部分重复代码放到一个类的static方法中
+
 2017-8-29 18:30
-- 增加了异常抛出
+- 增加了部分异常抛出
 - 修改了一些容易造成内存泄漏的代码，增加了builder的资源释放方法等
 
 2017-8-28 19:00
@@ -40,7 +45,6 @@
 ## TO_DO
 2017-8-25 18:40
 - ~~engine与dialogfragment生命周期绑定后的操作~~
-- 开新线程进行压缩和高斯模糊的操作，避免主线程阻塞
 
 2017-8-22 18:00
 - ~~将对话框的背景高斯模糊~~
@@ -52,13 +56,13 @@
 
 ## THINKING
 2017-8-25
-- 是否需要使用线程池管理压缩图片的线程，使用cache还是哪种线程池
+- 是否需要开新线程来进行高斯模糊，是否需要使用线程池管理压缩图片的线程
 
 2017-8-22
-- BlurDialog的show方法根据传入activity的instanceof进行了if-else判断，来选择使用app的dialogfragment还是v4包的dialogfragment，这种扩展性不高的方案在目前只有这两种dialogfragment的前提下是否可行
+- BlurDialog的show方法根据传入activity的instanceof进行了if-else判断，来选择使用app的dialogfragment还是v4包的dialogfragment，是不是扩展性不高
 - 为了使用builder模式，不止以后要用到的高斯模糊的初始化数据要放在builder类中，初始化alertdialog所有功能需要的数据也放在了builder类中，这种方案是否可行以及能否改进
 
 2017-8-21
-- 高斯模糊处理后是否需要缓存
+- 高斯模糊处理后的资源是否需要缓存
 - 接口设计是否需要改进
 - fastBlur算法
