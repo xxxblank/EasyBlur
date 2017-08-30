@@ -8,7 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
  * Created by U-nookia on 2017/8/22.
@@ -43,15 +47,8 @@ public class SupportDialogFragment extends DialogFragment {
         Log.e("dialog","start");
         Dialog dialog = getDialog();
         if (dialog!=null){
-            if (!builder.dimming){
-                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            }
-
-            int currentAnimation = dialog.getWindow().getAttributes().windowAnimations;
-            if (currentAnimation == 0) {
-                dialog.getWindow().getAttributes().windowAnimations
-                        = R.style.BlurDialogFragment_Default_Animation;
-            }
+            DialogFragmentConfig.dimmingConfig(dialog,builder.dimming);
+            DialogFragmentConfig.animationConfig(dialog);
         }
         super.onStart();
     }
@@ -76,6 +73,7 @@ public class SupportDialogFragment extends DialogFragment {
                         .setCancelable(builder.cancelable)
                         .setIcon(builder.mIcon)
                         .setIcon(builder.iconId)
+                        .setView(builder.view)
                         .setItems(builder.items,builder.mOnClickListener)
                         .setMultiChoiceItems(builder.items,builder.onCheckedItems,builder.mOnCheckboxClickListener)
                         .setNegativeButton(builder.negativeBtText,builder.mOnClickListener)
@@ -85,7 +83,9 @@ public class SupportDialogFragment extends DialogFragment {
                         .setOnDismissListener(builder.dismissListener)
                         .setSingleChoiceItems(builder.items,builder.mCheckedItem,builder.mOnClickListener);
 
-        return dialogBuilder.create();
+        AlertDialog dialog = dialogBuilder.create();
+        DialogFragmentConfig.dialogShowPoliceConfig(dialog,builder.showPolice);
+        return dialog;
     }
 
     @Override

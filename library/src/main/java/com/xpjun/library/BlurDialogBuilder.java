@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 
@@ -37,6 +39,9 @@ public class BlurDialogBuilder implements Serializable{
     protected int mCheckedItem;
     protected boolean isSingleChoice;
     protected AdapterView.OnItemClickListener mItemClickListener;
+    protected View view;
+    @BlurDialogShowPolice
+    protected int showPolice = BlurDialogShowPolice.common;
     protected Activity activity;
     @BlurPolice
     protected int police = BlurPolice.rsBlur;
@@ -61,6 +66,22 @@ public class BlurDialogBuilder implements Serializable{
 
     public BlurDialogBuilder setMultiReduce(@IntRange(from = 1,to = 25) int multiReduce) {
         this.multiReduce = multiReduce;
+        return this;
+    }
+
+    public BlurDialogBuilder setShowPolice(@BlurDialogShowPolice int police){
+        this.showPolice = police;
+        return this;
+    }
+
+    public BlurDialogBuilder setView(int viewId){
+        if (activity!=null)
+            view = View.inflate(activity,viewId,null);
+        return this;
+    }
+
+    public BlurDialogBuilder setView(View view){
+        this.view = view;
         return this;
     }
 
@@ -208,5 +229,6 @@ public class BlurDialogBuilder implements Serializable{
         mOnCheckboxClickListener = null;
         mItemClickListener = null;
         activity = null;
+        view = null;
     }
 }

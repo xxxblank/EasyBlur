@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.StringDef;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xpjun.library.BlurDialogBuilder;
+import com.xpjun.library.BlurDialogShowPolice;
 import com.xpjun.library.BlurPolice;
 import com.xpjun.library.EasyBlur;
 
@@ -66,8 +69,8 @@ public class SampleActivity extends Activity {
 
         verifyStoragePermissions(this);
 
-        dialog =  findViewById(R.id.dialog);
-        img =  findViewById(R.id.img);
+        dialog = (Button) findViewById(R.id.dialog);
+        img = (ImageView) findViewById(R.id.img);
 
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +84,25 @@ public class SampleActivity extends Activity {
                                 .setMessage("this is a dialog with blur background")
                                 .setPositiveBtText("yes")
                                 .setNegativeBtText("no")
-                                .setRadius(3)
-                                .setMultiReduce(3)
+                                .setRadius(6)
+                                .setMultiReduce(6)
+                                .setDimming(true)
+                                .build();
+                dialog.show();
+            }
+        });
+
+        findViewById(R.id.dialog_bottom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EasyBlur.BlurDialog dialog =
+                        new BlurDialogBuilder()
+                                .bind(SampleActivity.this)
+                                .setPolice(BlurPolice.rsBlur)
+                                .setShowPolice(BlurDialogShowPolice.bottom)
+                                .setView(R.layout.layout_dialog_bottom)
+                                .setRadius(6)
+                                .setMultiReduce(6)
                                 .setDimming(true)
                                 .build();
                 dialog.show();

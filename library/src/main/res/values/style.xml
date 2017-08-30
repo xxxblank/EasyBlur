@@ -6,4 +6,8 @@
         <item name="android:windowExitAnimation">@anim/default_dialog_out</item>
     </style>
 
+    <style name="BlurDialogFragment.Bottom.Animation" parent="@android:style/Animation.Dialog">
+        <item name="@android:windowEnterAnimation">@anim/bottom_dialog_in</item>
+        <item name="@android:windowExitAnimation">@anim/bottom_dialog_out</item>
+    </style>
 </resources>

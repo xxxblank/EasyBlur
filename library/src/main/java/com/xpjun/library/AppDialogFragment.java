@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Window;
 import android.view.WindowManager;
 
 /**
@@ -42,17 +44,11 @@ public class AppDialogFragment extends DialogFragment {
         Log.e("dialog","start");
         Dialog dialog = getDialog();
         if (dialog!=null){
-            if (!builder.dimming){
-                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            }
-
-            int currentAnimation = dialog.getWindow().getAttributes().windowAnimations;
-            if (currentAnimation == 0) {
-                dialog.getWindow().getAttributes().windowAnimations
-                        = R.style.BlurDialogFragment_Default_Animation;
-            }
+            DialogFragmentConfig.dimmingConfig(dialog,builder.dimming);
+            DialogFragmentConfig.animationConfig(dialog);
         }
         super.onStart();
+        DialogFragmentConfig.dialogShowPoliceConfig(dialog,builder.showPolice);
     }
 
     @Override
@@ -72,6 +68,7 @@ public class AppDialogFragment extends DialogFragment {
                         .setAdapter(builder.adapter,builder.mOnClickListener)
                         .setCancelable(builder.cancelable)
                         .setIcon(builder.mIcon)
+                        .setView(builder.view)
                         .setIcon(builder.iconId)
                         .setItems(builder.items,builder.mOnClickListener)
                         .setMultiChoiceItems(builder.items,builder.onCheckedItems,builder.mOnCheckboxClickListener)
@@ -81,7 +78,6 @@ public class AppDialogFragment extends DialogFragment {
                         .setOnKeyListener(builder.keyListener)
                         .setOnDismissListener(builder.dismissListener)
                         .setSingleChoiceItems(builder.items,builder.mCheckedItem,builder.mOnClickListener);
-
         return dialogBuilder.create();
     }
 

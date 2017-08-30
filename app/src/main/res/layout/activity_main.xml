@@ -15,35 +15,40 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/img"
         android:text="blur传入resid"
         android:id="@+id/res" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/res"
         android:text="blur传入bitmap"
         android:id="@+id/bitmap" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/bitmap"
         android:text="blur传入path"
         android:id="@+id/path" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/path"
         android:text="blur传入file"
         android:id="@+id/file" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/file"
         android:text="弹高斯模糊对话框"
         android:id="@+id/dialog" />
@@ -51,8 +56,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_below="@+id/dialog"
+        android:text="弹底部对话框"
+        android:id="@+id/dialog_bottom" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_below="@+id/dialog_bottom"
         android:text="重置图片"
         android:id="@+id/reset" />
 
