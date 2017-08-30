@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.StringDef;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xpjun.library.BlurDialogBuilder;
 import com.xpjun.library.BlurDialogShowPolice;
@@ -118,6 +113,9 @@ public class SampleActivity extends Activity {
                 if (file.exists()){
                     Log.e("Sample","file  exists");
                     EasyBlur.getInstance().blur(file).police(BlurPolice.rsBlur).into(img);
+                }else {
+                    Toast.makeText(SampleActivity.this,"路径上没有示例图片，正在保存图片到本地，请稍候",Toast.LENGTH_SHORT).show();
+                    savePic("");
                 }
 
             }
@@ -134,8 +132,17 @@ public class SampleActivity extends Activity {
         findViewById(R.id.path).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyBlur.getInstance().blur(getExternalFilesDir(null)+"/testImg/"+"test2.jpg")
-                        .police(BlurPolice.rsBlur).into(img);
+                String path = getExternalFilesDir(null)+"/testImg/"+"test2.jpg";
+
+                File file = new File(path);
+                if (file.exists()){
+                    Log.e("Sample","file  exists");
+                    EasyBlur.getInstance().blur(path)
+                            .police(BlurPolice.rsBlur).into(img);
+                }else {
+                    Toast.makeText(SampleActivity.this,"路径上没有示例图片，正在保存图片到本地，请稍候",Toast.LENGTH_SHORT).show();
+                    savePic("");
+                }
             }
         });
 
@@ -171,6 +178,8 @@ public class SampleActivity extends Activity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            Toast.makeText(SampleActivity.this,"保存完成，请再点击一次",Toast.LENGTH_SHORT).show();
         }
     }
 }
