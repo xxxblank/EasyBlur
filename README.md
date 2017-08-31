@@ -28,12 +28,17 @@ dependencies {
 
 Step 3. use the EasyBlur in your project
 
+![original picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2qfyv242j30u01cb47t.jpg)
+
 - blur a picture into an imageView
 ```java
 EasyBlur.getInstance().blur(R.drawable.head2).into(imageView);
 EasyBlur.getInstance().blur(bitmap).police(BlurPolice.rsBlur).into(imageView);
 EasyBlur.getInstance().blur(file).radius(6).reduce(4).into(imageView);
 ```
+
+![blur picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2qgsm297j30u01c37ar.jpg)
+
 - show a common blurDialog
 ```java
 EasyBlur.BlurDialog dialog =
@@ -51,6 +56,8 @@ EasyBlur.BlurDialog dialog =
                 dialog.show();
 ```
 
+![common blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2qh13xl2j30u01bxafx.jpg)
+
 - show a bottom blurDialog
 ```java
 EasyBlur.BlurDialog dialog =
@@ -65,10 +72,8 @@ EasyBlur.BlurDialog dialog =
                                 .build();
                 dialog.show();
 ```
-![original picture](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qczoj8yj30u01cb47t.jpg)
-![blur picture](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qdqblrfj30u01c37ar.jpg)
-![common blurDialog](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qe11ps6j30u01bxafx.jpg)
-![bottom blurDialog](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qeety73j30u01cg7aa.jpg)
+
+![bottom blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2qhbcin3j30u01cg7aa.jpg)
 
 ## DONE
 2017-8-30 17:00
