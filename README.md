@@ -7,17 +7,24 @@
 已发布v1.0.0版本库（测试用）
 ## GRADLE USAGE
 Step 1. Add the JitPack repository to your build file
+
 Add it in your root build.gradle at the end of repositories:
-	allprojects {
+```java
+allprojects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
 		}
-	}Copy
+	}
+```
+
 Step 2. Add the dependency
-	dependencies {
+
+```java
+dependencies {
 	        compile 'com.github.xxxblank:EasyBlur:1.0.0'
 	}
+```
 
 Step 3. use the EasyBlur in your project
 
@@ -58,10 +65,10 @@ EasyBlur.BlurDialog dialog =
                                 .build();
                 dialog.show();
 ```
-![original picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q7g9182j30u01cb47t.jpg)
-![blur picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q9f4n3fj30u01c37ar.jpg)
-![common blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q6thz9ij30u01bxafx.jpg)
-![bottom blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q8nyicfj30u01cg7aa.jpg)
+![original picture](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qczoj8yj30u01cb47t.jpg)
+![blur picture](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qdqblrfj30u01c37ar.jpg)
+![common blurDialog](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qe11ps6j30u01bxafx.jpg)
+![bottom blurDialog](http://ww1.sinaimg.cn/thumbnail/006aoiFpgy1fj2qeety73j30u01cg7aa.jpg)
 
 ## DONE
 2017-8-30 17:00
