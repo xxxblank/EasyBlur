@@ -4,6 +4,65 @@
 > - ~~对任意图片进行可设置强度的高斯模糊处理，并显示到需要的控件上；~~
 > - ~~弹出以当前画面的高斯模糊为背景的对话框~~
 
+已发布v1.0.0版本库（测试用）
+## GRADLE USAGE
+Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}Copy
+Step 2. Add the dependency
+	dependencies {
+	        compile 'com.github.xxxblank:EasyBlur:1.0.0'
+	}
+
+Step 3. use the EasyBlur in your project
+
+- blur a picture into an imageView
+```java
+EasyBlur.getInstance().blur(R.drawable.head2).into(imageView);
+EasyBlur.getInstance().blur(bitmap).police(BlurPolice.rsBlur).into(imageView);
+EasyBlur.getInstance().blur(file).radius(6).reduce(4).into(imageView);
+```
+- show a common blurDialog
+```java
+EasyBlur.BlurDialog dialog =
+                        new BlurDialogBuilder()
+                                .bind(SampleActivity.this)
+                                .setPolice(BlurPolice.rsBlur)
+                                .setTitle("test")
+                                .setMessage("this is a dialog with blur background")
+                                .setPositiveBtText("yes")
+                                .setNegativeBtText("no")
+                                .setRadius(6)
+                                .setMultiReduce(6)
+                                .setDimming(true)
+                                .build();
+                dialog.show();
+```
+
+- show a bottom blurDialog
+```java
+EasyBlur.BlurDialog dialog =
+                        new BlurDialogBuilder()
+                                .bind(SampleActivity.this)
+                                .setPolice(BlurPolice.rsBlur)
+                                .setShowPolice(BlurDialogShowPolice.bottom)
+                                .setView(R.layout.layout_dialog_bottom)
+                                .setRadius(6)
+                                .setMultiReduce(6)
+                                .setDimming(true)
+                                .build();
+                dialog.show();
+```
+![original picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q7g9182j30u01cb47t.jpg)
+![blur picture](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q9f4n3fj30u01c37ar.jpg)
+![common blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q6thz9ij30u01bxafx.jpg)
+![bottom blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2q8nyicfj30u01cg7aa.jpg)
+
 ## DONE
 2017-8-30 17:00
 - 增加了blurdialog对自定义view添加支持
