@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.ActivityCompat;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class SampleActivity extends Activity {
+public class SampleActivity extends AppCompatActivity {
 
     private Button dialog;
     private ImageView img;
@@ -149,7 +150,7 @@ public class SampleActivity extends Activity {
         findViewById(R.id.res).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyBlur.getInstance().blur(R.drawable.head2).police(BlurPolice.rsBlur).into(img);
+                EasyBlur.getInstance().blur(R.drawable.big2).police(BlurPolice.rsBlur).into(img);
             }
         });
 

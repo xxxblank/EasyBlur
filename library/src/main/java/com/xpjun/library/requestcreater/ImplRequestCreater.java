@@ -5,16 +5,24 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.IntRange;
+import android.support.annotation.MainThread;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.xpjun.library.BlurPolice;
+import com.xpjun.library.CheckUtil;
 import com.xpjun.library.CompressUtil;
+import com.xpjun.library.DoBlurRunnable;
 import com.xpjun.library.blurhelper.BlurHelper;
 import com.xpjun.library.blurhelper.BlurHelperFactory;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -50,30 +58,38 @@ public class ImplRequestCreater implements RequestCreator {
 
         blurHelper = BlurHelperFactory.getBlurHelper(imageView.getContext(),police);
 
-        Bitmap scaleBitmap,temp = null;
+        Bitmap temp = null;
 
         if (original!=null){
-            temp = original;
+            temp = original.copy(Bitmap.Config.ARGB_8888,true);
         }
 
         if (resourseId!=0){
-            temp = CompressUtil.getCompressBitmap(imageView.getContext().getResources(),
-                    resourseId,imageView.getWidth(),imageView.getHeight());
+            if (!CheckUtil.checkBitmap(imageView.getResources()
+                    ,resourseId,imageView.getHeight(),imageView.getWidth())){
+                Toast.makeText(imageView.getContext(),"图片资源过大，请压缩后使用",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            temp = BitmapFactory.decodeResource(imageView.getResources()
+                    ,resourseId);
         }
 
         if (file!=null){
-            temp = CompressUtil.getCompressBitmap(file,imageView.getWidth(),imageView.getHeight());
+            if (!CheckUtil.checkBitmap(file
+                    ,imageView.getHeight(),imageView.getWidth())){
+                Toast.makeText(imageView.getContext(),"图片资源过大，请压缩后使用",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            temp = BitmapFactory.decodeFile(file.getAbsolutePath());
         }
 
         if (temp == null){
             throw new RuntimeException("have no bitmap to show");
         }
         try {
-            scaleBitmap = Bitmap.createScaledBitmap(temp,temp.getWidth()/multiReduce
-                    ,temp.getHeight()/multiReduce,false);
-            Bitmap result = blurHelper.doBlur(scaleBitmap,radius,true);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setImageDrawable(new BitmapDrawable(result));
+            new DoBlurRunnable(temp.copy(Bitmap.Config.ARGB_8888,true)
+                    ,multiReduce,radius,police,imageView)
+                    .execute();
         }finally {
             if (original!=null) original.recycle();
             temp.recycle();
@@ -96,5 +112,19 @@ public class ImplRequestCreater implements RequestCreator {
     public RequestCreator reduce(@IntRange(from = 1,to = 25)int multi){
         multiReduce = multi;
         return this;
+    }
+
+    public static class ObtainImageHandler extends Handler{
+
+        @Override
+        public void handleMessage(Message msg) {
+            Log.e("newThread","back to handle");
+            ImageView imageView = (ImageView) msg.obj;
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Bitmap result = msg.getData().getParcelable("result");
+            imageView.setImageDrawable(
+                    new BitmapDrawable(result.copy(Bitmap.Config.ARGB_4444,false)));
+            result.recycle();
+        }
     }
 }

@@ -44,7 +44,6 @@ public class BgBlurEngine implements BlurEngine{
         backgroundView.setDrawingCacheEnabled(true);
         bgBitmap = backgroundView.getDrawingCache();
         blurBgView = new ImageView(holdActivity);
-        blurBgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         EasyBlur.getInstance()
                 .blur(bgBitmap)
                 .reduce(reduce)
