@@ -76,6 +76,10 @@ EasyBlur.BlurDialog dialog =
 ![bottom blurDialog](http://ww1.sinaimg.cn/mw690/006aoiFpgy1fj2qhbcin3j30u01cg7aa.jpg)
 
 ## DONE
+2017-8-31 18:43
+- 将模糊处理的操作放到了新线程中，使用cache线程池管理线程，避免主线程耗时
+- 将传入图片过大后默认压缩然后模糊的策略改为判断图片过大后提示用户压缩，将压缩的主动权给用户，轮子本身不主动进行压缩
+
 2017-8-30 17:00
 - 增加了blurdialog对自定义view添加支持
 - 增加了底部dialog，适配v4和app包
@@ -126,8 +130,12 @@ EasyBlur.BlurDialog dialog =
 - ~~当前界面的高斯模糊以及对话框功能的实现~~
 
 ## THINKING
+2017-8-31
+- 会不会有不停对同一张图片模糊处理的情况，如果每一次都重复调用doBlur太浪费资源
+- 显示blurDialog的时候，如果背景是动态的怎么处理
+
 2017-8-25
-- 是否需要开新线程来进行高斯模糊，是否需要使用线程池管理压缩图片的线程
+- ~~是否需要开新线程来进行高斯模糊，是否需要使用线程池管理压缩图片的线程~~
 
 2017-8-22
 - BlurDialog的show方法根据传入activity的instanceof进行了if-else判断，来选择使用app的dialogfragment还是v4包的dialogfragment，是不是扩展性不高
