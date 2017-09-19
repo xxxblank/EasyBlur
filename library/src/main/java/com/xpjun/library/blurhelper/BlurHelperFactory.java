@@ -1,6 +1,7 @@
 package com.xpjun.library.blurhelper;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.xpjun.library.BlurPolice;
 
@@ -16,7 +17,7 @@ public class BlurHelperFactory {
             case BlurPolice.rsBlur:
                 return new RenderScriptBlurHelper(context);
             default:
-                return null;
+                throw new RuntimeException("this blurHelper can't do blur");
         }
     }
 }

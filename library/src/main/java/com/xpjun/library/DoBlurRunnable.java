@@ -44,13 +44,13 @@ public class DoBlurRunnable implements Runnable{
         Bitmap scaleBitmap = null;
         Bitmap result = null;
         try {
-            Bitmap cache = temp.copy(Bitmap.Config.ARGB_8888,true);
+            Bitmap cache = temp.copy(Bitmap.Config.ARGB_8888,false);
             scaleBitmap = Bitmap.createScaledBitmap(cache,cache.getWidth()/reduce
                     ,cache.getHeight()/reduce,false);
             result = BlurHelperFactory.getBlurHelper(image.get().getContext(),police)
                     .doBlur(scaleBitmap,radius,true);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("result",result.copy(Bitmap.Config.ARGB_8888,true));
+            bundle.putParcelable("result",result.copy(Bitmap.Config.ARGB_8888,false));
             Message msg = Message.obtain();
             msg.obj = image.get();
             msg.setData(bundle);

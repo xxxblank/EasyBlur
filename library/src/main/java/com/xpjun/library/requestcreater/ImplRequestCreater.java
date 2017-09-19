@@ -61,25 +61,15 @@ public class ImplRequestCreater implements RequestCreator {
         Bitmap temp = null;
 
         if (original!=null){
-            temp = original.copy(Bitmap.Config.ARGB_8888,true);
+            temp = original;
         }
 
         if (resourseId!=0){
-            if (!CheckUtil.checkBitmap(imageView.getResources()
-                    ,resourseId,imageView.getHeight(),imageView.getWidth())){
-                Toast.makeText(imageView.getContext(),"图片资源过大，请压缩后使用",Toast.LENGTH_SHORT).show();
-                return;
-            }
             temp = BitmapFactory.decodeResource(imageView.getResources()
                     ,resourseId);
         }
 
         if (file!=null){
-            if (!CheckUtil.checkBitmap(file
-                    ,imageView.getHeight(),imageView.getWidth())){
-                Toast.makeText(imageView.getContext(),"图片资源过大，请压缩后使用",Toast.LENGTH_SHORT).show();
-                return;
-            }
             temp = BitmapFactory.decodeFile(file.getAbsolutePath());
         }
 
@@ -87,7 +77,7 @@ public class ImplRequestCreater implements RequestCreator {
             throw new RuntimeException("have no bitmap to show");
         }
         try {
-            new DoBlurRunnable(temp.copy(Bitmap.Config.ARGB_8888,true)
+            new DoBlurRunnable(temp.copy(Bitmap.Config.ARGB_8888,false)
                     ,multiReduce,radius,police,imageView)
                     .execute();
         }finally {
@@ -118,12 +108,11 @@ public class ImplRequestCreater implements RequestCreator {
 
         @Override
         public void handleMessage(Message msg) {
-            Log.e("newThread","back to handle");
             ImageView imageView = (ImageView) msg.obj;
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Bitmap result = msg.getData().getParcelable("result");
             imageView.setImageDrawable(
-                    new BitmapDrawable(result.copy(Bitmap.Config.ARGB_4444,false)));
+                    new BitmapDrawable(result.copy(Bitmap.Config.ARGB_8888,false)));
             result.recycle();
         }
     }

@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class SampleActivity extends AppCompatActivity {
+public class SampleActivity extends Activity {
 
     private Button dialog;
     private ImageView img;
@@ -150,7 +150,7 @@ public class SampleActivity extends AppCompatActivity {
         findViewById(R.id.res).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyBlur.getInstance().blur(R.drawable.big2).police(BlurPolice.rsBlur).into(img);
+                EasyBlur.getInstance().blur(R.drawable.head2).police(BlurPolice.rsBlur).into(img);
             }
         });
 
