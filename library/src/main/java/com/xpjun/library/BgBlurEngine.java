@@ -2,6 +2,7 @@ package com.xpjun.library;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -64,7 +65,24 @@ public class BgBlurEngine implements BlurEngine{
         if (blurBgView==null){
             throw new RuntimeException("background blur view has not be shown");
         }
-        blurBgView.animate()
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(blurBgView,"alpha",0);
+        animator.setDuration(300).addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                removeBgView();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                removeBgView();
+            }
+        });
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+        /*blurBgView.animate()
                 .alpha(0)
                 .setDuration(300)
                 .setInterpolator(new LinearInterpolator())
@@ -81,7 +99,7 @@ public class BgBlurEngine implements BlurEngine{
                         removeBgView();
                     }
                 })
-                .start();
+                .start();*/
 
     }
 

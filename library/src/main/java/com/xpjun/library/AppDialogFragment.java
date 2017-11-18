@@ -1,5 +1,6 @@
 package com.xpjun.library;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -30,25 +31,37 @@ public class AppDialogFragment extends DialogFragment {
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
 
         builder = (BlurDialogBuilder) getArguments().get("builder");
         engine = new BgBlurEngine(getActivity());
         engine.setRadius(builder.radius);
         engine.setBlurPolice(builder.police);
         engine.setMultiReduce(builder.multiReduce);
+
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+
+        builder = (BlurDialogBuilder) getArguments().get("builder");
+        engine = new BgBlurEngine(getActivity());
+        engine.setRadius(builder.radius);
+        engine.setBlurPolice(builder.police);
+        engine.setMultiReduce(builder.multiReduce);
+        super.onAttach(activity);
     }
 
     @Override
     public void onStart() {
         Log.e("dialog","start");
         Dialog dialog = getDialog();
+        super.onStart();
         if (dialog!=null){
             DialogFragmentConfig.dimmingConfig(dialog,builder.dimming);
             DialogFragmentConfig.animationConfig(dialog);
+            DialogFragmentConfig.dialogShowPoliceConfig(dialog,builder.showPolice);
         }
-        super.onStart();
-        DialogFragmentConfig.dialogShowPoliceConfig(dialog,builder.showPolice);
     }
 
     @Override
@@ -60,6 +73,9 @@ public class AppDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        /*onAttach(getActivity());
+        onStart();
+        onResume();*/
         AlertDialog.Builder dialogBuilder =
                 new AlertDialog
                         .Builder(getActivity())

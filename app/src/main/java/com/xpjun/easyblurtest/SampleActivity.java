@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class SampleActivity extends Activity {
+public class SampleActivity extends AppCompatActivity {
 
     private Button dialog;
     private ImageView img;
